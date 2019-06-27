@@ -13,10 +13,8 @@ app.add_route('/v1/session', session.Collection())
 
 app.add_route('/v1/status', status.Collection())
 
+if __name__ == 'app.main':
 
-
-
-if __name__ == 'main':
     from app.database import session, engine
     
     session.configure(bind=engine)
