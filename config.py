@@ -9,5 +9,9 @@ JWT_EXP = (1400) * 60
 
 
 DATABASE_DIR = Path(os.path.dirname(__file__)) / 'bin' / 'database'
+
+if not os.path.exists(DATABASE_DIR):
+    os.makedirs(DATABASE_DIR)
+
 DATABASE_URL = 'sqlite:///%s/sqlite3.db' % (DATABASE_DIR)
 DATABASE_ECHO = False

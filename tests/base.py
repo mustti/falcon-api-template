@@ -1,20 +1,15 @@
-import sys
-sys.path.append("..")
-
 from falcon import testing
+import pytest
 from app.main import app
 
-class MyTestCase(testing.TestCase):
-    def setUp(self):
-        super(MyTestCase, self).setUp()
+@pytest.fixture()
+def client():
+    # Assume the hypothetical `myapp` package has a function called
+    # `create()` to initialize and return a `falcon.API` instance.
+    return testing.TestClient(app)
 
-        self.app = main.app
+def test_status(client):
+    response = 'Everything is fine!'
 
-
-class TestMyApp(MyTestCase):
-    def test_status(self):
-        response = 'Everything is fine!'
-
-        result = self.simulate_get('/v1/status')
-        self.assertEqual(result.json, response)
-        
+    result = client.simulate_get('/v1/status')
+    assert result.json['response'] == response
