@@ -1,1 +1,1 @@
-python3 -m pytest tests/base.py 
+python3 -m pytest tests/*

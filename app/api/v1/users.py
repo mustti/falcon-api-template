@@ -7,8 +7,6 @@ from app.model import user
 from app.utils import password
 
 
-
-
 class Collection(BaseResource):
 
     user_validator = {
@@ -50,6 +48,8 @@ class Collection(BaseResource):
 
         session.add(user_data)
 
+        self.on_created("User registered successfully.", resp)
+
 
     def on_get(self, req, resp):
         
@@ -61,7 +61,7 @@ class Collection(BaseResource):
 
         data = user_schema.dump(user_db, many=True).data
 
-        resp.media = data
+        self.on_success(data, resp)
 
 class Item(BaseResource):
 
